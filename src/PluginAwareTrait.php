@@ -20,16 +20,25 @@ trait PluginAwareTrait {
 	 *
 	 * @var PluginInterface
 	 */
-	protected $plugin;
+	private $plugin;
 
 	/**
 	 * Set the main plugin instance.
 	 *
 	 * @param  PluginInterface $plugin Main plugin instance.
-	 * @return $this
+	 * @return PluginInterface
 	 */
-	public function set_plugin( PluginInterface $plugin ) {
+	public function set_plugin( PluginInterface $plugin ): PluginInterface {
 		$this->plugin = $plugin;
-		return $this;
+		return $plugin;
 	}
+
+    /**
+     * Get the main plugin instance.
+     *
+     * @return PluginInterface
+     */
+	public function get_plugin(): PluginInterface {
+	    return $this->plugin;
+    }
 }

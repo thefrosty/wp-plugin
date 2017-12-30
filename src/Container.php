@@ -36,7 +36,7 @@ class Container extends Pimple implements ContainerInterface {
 	 * @param  string $id Identifier of the entry to look for.
 	 * @return bool
 	 */
-	public function has( $id ) {
+	public function has( $id ): bool {
 		return $this->offsetExists( $id );
 	}
 }

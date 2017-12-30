@@ -9,8 +9,6 @@
 
 namespace Cedaro\WP\Plugin;
 
-use Cedaro\WP\Plugin\Plugin;
-
 /**
  * Plugin factory class.
  *
@@ -24,9 +22,9 @@ class PluginFactory {
 	 * @param string $filename Optional. Absolute path to the main plugin file.
 	 *                         This should be passed if the calling file is not
 	 *                         the main plugin file.
-	 * @return Plugin Plugin instance.
+	 * @return Plugin A Plugin object instance.
 	 */
-	public static function create( $slug, $filename = '' ) {
+	public static function create( string $slug, string $filename = '' ): Plugin {
 		// Use the calling file as the main plugin file.
 		if ( empty( $filename ) ) {
 			$backtrace = debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT, 1 );

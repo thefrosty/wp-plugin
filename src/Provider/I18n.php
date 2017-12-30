@@ -40,7 +40,7 @@ class I18n implements PluginAwareInterface, HookProviderInterface {
 	 * Load the text domain to localize the plugin.
 	 */
 	protected function load_textdomain() {
-		$plugin_rel_path = dirname( $this->plugin->get_basename() ) . '/languages';
-		load_plugin_textdomain( $this->plugin->get_slug(), false, $plugin_rel_path );
+		$plugin_rel_path = dirname( $this->get_plugin()->get_basename() ) . '/languages';
+		load_plugin_textdomain( $this->get_plugin()->get_slug(), false, $plugin_rel_path );
 	}
 }

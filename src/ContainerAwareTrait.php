@@ -25,16 +25,17 @@ trait ContainerAwareTrait {
 	 *
 	 * @var ContainerInterface
 	 */
-	protected $container;
+	private $container;
 
 	/**
 	 * Proxy access to container services.
 	 *
 	 * @param  string $name Service name.
 	 * @return mixed
+     * @inheritdoc
 	 */
-	public function __get( $name ) {
-		return $this->container->get( $name );
+	public function __get( string $name ) {
+	    return $this->get_container()->get( $name );
 	}
 
 	/**
@@ -43,8 +44,8 @@ trait ContainerAwareTrait {
 	 * @param  string $name Service name.
 	 * @return bool
 	 */
-	public function __isset( $name ) {
-		return $this->container->has( $name );
+	public function __isset( $name ): bool {
+		return $this->get_container()->has( $name );
 	}
 
 	/**
@@ -54,14 +55,16 @@ trait ContainerAwareTrait {
 	 * @param  string $method Method name.
 	 * @param  array  $args   Method arguments.
 	 * @return mixed
+     * @inheritdoc
 	 */
-	public function __call( $method, $args ) {
-		if ( $this->container->has( $method ) ) {
+	public function __call( string $method, array $args ) {
+		if ( $this->get_container()->has( $method ) ) {
 			$object = $this->container->get( $method );
 			if ( is_callable( $object ) ) {
 				return call_user_func_array( $object, $args );
 			}
 		}
+		return false;
 	}
 
 	/**
@@ -69,7 +72,7 @@ trait ContainerAwareTrait {
 	 *
 	 * @return ContainerInterface
 	 */
-	public function get_container() {
+	public function get_container(): ContainerInterface {
 		return $this->container;
 	}
 
@@ -78,10 +81,11 @@ trait ContainerAwareTrait {
 	 *
 	 * @param  ContainerInterface $container Dependency injection container.
 	 * @return $this
+     * @throws \InvalidArgumentException
 	 */
-	public function set_container( $container ) {
-		if ( ! $container instanceof ContainerInterface ) {
-			throw new InvalidArgumentException( 'Expected a ContainerInterface' );
+	public function set_container( ContainerInterface $container ): parent {
+		if ( ! ( $container instanceof ContainerInterface ) ) {
+			throw new \InvalidArgumentException( 'Expected a . ' . ContainerInterface::class );
 		}
 
 		$this->container = $container;

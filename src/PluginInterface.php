@@ -24,22 +24,22 @@ interface PluginInterface {
 	 *
 	 * @return string
 	 */
-	public function get_basename();
+    public function get_basename(): string;
 
 	/**
 	 * Set the plugin basename.
 	 *
 	 * @param string $basename Relative path from the main plugin directory.
-	 * @return string
+	 * @return $this
 	 */
-	public function set_basename( $basename );
+	public function set_basename( string $basename ): self;
 
 	/**
 	 * Retrieve the plugin directory.
 	 *
 	 * @return string
 	 */
-	public function get_directory();
+	public function get_directory(): string;
 
 	/**
 	 * Set the plugin's directory.
@@ -47,7 +47,7 @@ interface PluginInterface {
 	 * @param  string $directory Absolute path to the main plugin directory.
 	 * @return $this
 	 */
-	public function set_directory( $directory );
+	public function set_directory( string $directory ): self;
 
 	/**
 	 * Retrieve the path to a file in the plugin.
@@ -55,14 +55,14 @@ interface PluginInterface {
 	 * @param  string $path Optional. Path relative to the plugin root.
 	 * @return string
 	 */
-	public function get_path( $path = '' );
+	public function get_path( string $path = '' ): string;
 
 	/**
 	 * Retrieve the absolute path for the main plugin file.
 	 *
 	 * @return string
 	 */
-	public function get_file();
+	public function get_file(): string;
 
 	/**
 	 * Set the path to the main plugin file.
@@ -70,14 +70,14 @@ interface PluginInterface {
 	 * @param  string $file Absolute path to the main plugin file.
 	 * @return $this
 	 */
-	public function set_file( $file );
+	public function set_file( string $file ): self;
 
 	/**
-	 * Retrieve the plugin indentifier.
+	 * Retrieve the plugin identifier.
 	 *
 	 * @return string
 	 */
-	public function get_slug();
+	public function get_slug(): string;
 
 	/**
 	 * Set the plugin identifier.
@@ -85,7 +85,7 @@ interface PluginInterface {
 	 * @param  string $slug Plugin identifier.
 	 * @return $this
 	 */
-	public function set_slug( $slug );
+	public function set_slug( string $slug ): self;
 
 	/**
 	 * Retrieve the URL for a file in the plugin.
@@ -93,7 +93,7 @@ interface PluginInterface {
 	 * @param  string $path Optional. Path relative to the plugin root.
 	 * @return string
 	 */
-	public function get_url( $path = '' );
+	public function get_url( string $path = '' ): string;
 
 	/**
 	 * Set the URL for plugin directory root.
@@ -101,12 +101,13 @@ interface PluginInterface {
 	 * @param  string $url URL to the root of the plugin directory.
 	 * @return $this
 	 */
-	public function set_url( $url );
+	public function set_url( string $url ): self;
 
 	/**
 	 * Register hooks for the plugin.
 	 *
 	 * @param HookProviderInterface $provider Hook provider.
+     * @return $this
 	 */
-	public function register_hooks( HookProviderInterface $provider );
+	public function register_hooks( HookProviderInterface $provider ): self;
 }
