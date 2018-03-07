@@ -1,25 +1,25 @@
-<?php
+<?php declare( strict_types=1 );
 /**
  * Base hook provider.
  *
- * @package   Cedaro\WP\Plugin
+ * @package   TheFrosty\WP\Plugin
  * @copyright Copyright (c) 2017 Cedaro, LLC
  * @license   MIT
  */
 
-namespace Cedaro\WP\Plugin;
+namespace TheFrosty\WP\Plugin;
 
 /**
  * Base hook provider class.
  *
- * @package Cedaro\WP\Plugin
+ * @package TheFrosty\WP\Plugin
  */
 abstract class AbstractHookProvider implements HookProviderInterface, PluginAwareInterface {
 
-	use HooksTrait, PluginAwareTrait;
+    use HooksTrait, PluginAwareTrait;
 
-	/**
-	 * Registers hooks for the plugin.
-	 */
-	abstract public function register_hooks();
+    /**
+     * Registers hooks for the plugin.
+     */
+    abstract public function register_hooks();
 }

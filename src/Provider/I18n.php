@@ -1,46 +1,49 @@
-<?php
+<?php declare( strict_types=1 );
 /**
  * Internationalization provider.
  *
- * @package   Cedaro\WP\Plugin
+ * @package   TheFrosty\WP\Plugin
  * @copyright Copyright (c) 2015 Cedaro, LLC
  * @license   MIT
  */
 
-namespace Cedaro\WP\Plugin\Provider;
+namespace TheFrosty\WP\Plugin\Provider;
 
-use Cedaro\WP\Plugin\HookProviderInterface;
-use Cedaro\WP\Plugin\HooksTrait;
-use Cedaro\WP\Plugin\PluginAwareInterface;
-use Cedaro\WP\Plugin\PluginAwareTrait;
+use TheFrosty\WP\Plugin\HookProviderInterface;
+use TheFrosty\WP\Plugin\HooksTrait;
+use TheFrosty\WP\Plugin\PluginAwareInterface;
+use TheFrosty\WP\Plugin\PluginAwareTrait;
 
 /**
  * Internationalization class.
  *
- * @package Cedaro\WP\Plugin
+ * @package TheFrosty\WP\Plugin
  */
 class I18n implements PluginAwareInterface, HookProviderInterface {
 
-	use HooksTrait, PluginAwareTrait;
+    use HooksTrait, PluginAwareTrait;
 
-	/**
-	 * Register hooks.
-	 *
-	 * Loads the text domain during the `plugins_loaded` action.
-	 */
-	public function register_hooks() {
-		if ( did_action( 'plugins_loaded' ) ) {
-			$this->load_textdomain();
-		} else {
-			$this->add_action( 'plugins_loaded', 'load_textdomain' );
-		}
-	}
+    /**
+     * Register hooks.
+     *
+     * Loads the text domain during the `plugins_loaded` action.
+     */
+    public function register_hooks() {
+        if ( \did_action( 'plugins_loaded' ) ) {
+            $this->load_textdomain();
+        } else {
+            $this->add_action( 'plugins_loaded', [ $this, 'load_textdomain' ] );
+        }
+    }
 
-	/**
-	 * Load the text domain to localize the plugin.
-	 */
-	protected function load_textdomain() {
-		$plugin_rel_path = dirname( $this->get_plugin()->get_basename() ) . '/languages';
-		load_plugin_textdomain( $this->get_plugin()->get_slug(), false, $plugin_rel_path );
-	}
+    /**
+     * Load the text domain to localize the plugin.
+     */
+    protected function load_textdomain() {
+        load_plugin_textdomain(
+            $this->get_plugin()->get_slug(),
+            false,
+            dirname( $this->get_plugin()->get_basename() ) . '/languages'
+        );
+    }
 }

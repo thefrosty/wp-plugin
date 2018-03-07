@@ -1,20 +1,20 @@
-<?php
+<?php declare( strict_types=1 );
 /**
  * Generic plugin implementation.
  *
- * @package   Cedaro\WP\Plugin
+ * @package   TheFrosty\WP\Plugin
  * @copyright Copyright (c) 2015 Cedaro, LLC
  * @license   MIT
  */
 
-namespace Cedaro\WP\Plugin;
+namespace TheFrosty\WP\Plugin;
 
 /**
  * Main plugin class.
  *
- * @package Cedaro\WP\Plugin
+ * @package TheFrosty\WP\Plugin
  */
 class Plugin extends AbstractPlugin {
 
-	use ContainerAwareTrait;
+    use ContainerAwareTrait;
 }

@@ -1,11 +1,14 @@
-<?php
-namespace Cedaro\WP\Plugin\Test;
+<?php declare( strict_types=1 );
 
-use Cedaro\WP\Plugin\Plugin;
+namespace TheFrosty\WP\Plugin\Test;
 
-class PluginTest extends \PHPUnit\Framework\TestCase {
-	public function test_implements_plugin_interface() {
-		$plugin = new Plugin();
-		$this->assertInstanceOf( '\Cedaro\WP\Plugin\PluginInterface', $plugin );
-	}
+use TheFrosty\WP\Plugin\Plugin;
+use TheFrosty\WP\Plugin\PluginInterface;
+use TheFrosty\WP\Plugin\Test\Framework\TestCase;
+
+class PluginTest extends TestCase {
+    public function test_implements_plugin_interface() {
+        $plugin = new Plugin();
+        $this->assertInstanceOf( PluginInterface::class, $plugin );
+    }
 }

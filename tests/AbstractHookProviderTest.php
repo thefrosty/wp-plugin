@@ -1,15 +1,20 @@
 <?php
-namespace Cedaro\WP\Plugin\Test;
 
-class AbstractHookProviderTest extends \PHPUnit\Framework\TestCase {
-	public function test_implements_interfaces() {
-		$provider = $this->get_mock_provider();
-		$this->assertInstanceOf( '\Cedaro\WP\Plugin\HookProviderInterface', $provider );
-		$this->assertInstanceOf( '\Cedaro\WP\Plugin\PluginAwareInterface', $provider );
-	}
+namespace TheFrosty\WP\Plugin\Test;
 
-	protected function get_mock_provider() {
-		return $this->getMockBuilder( '\Cedaro\WP\Plugin\AbstractHookProvider' )
-			->getMockForAbstractClass();
-	}
+use TheFrosty\WP\Plugin\AbstractHookProvider;
+use TheFrosty\WP\Plugin\HookProviderInterface;
+use TheFrosty\WP\Plugin\PluginAwareInterface;
+use TheFrosty\WP\Plugin\Test\Framework\TestCase;
+
+class AbstractHookProviderTest extends TestCase {
+    public function test_implements_interfaces() {
+        $provider = $this->get_mock_provider();
+        $this->assertInstanceOf( HookProviderInterface::class, $provider );
+        $this->assertInstanceOf( PluginAwareInterface::class, $provider );
+    }
+
+    protected function get_mock_provider() {
+        return $this->getMockBuilder( AbstractHookProvider::class )->getMockForAbstractClass();
+    }
 }
