@@ -1,20 +1,29 @@
 <?php
-namespace Cedaro\WP\Plugin\Test;
 
-use Cedaro\WP\Plugin\Plugin;
-use Cedaro\WP\Plugin\PluginAwareTrait;
+namespace TheFrosty\WP\Plugin\Test;
 
-class PluginAwareTraitTest extends \PHPUnit\Framework\TestCase {
-	public function test_set_plugin() {
-		$provider = $this->getMockForTrait( '\Cedaro\WP\Plugin\PluginAwareTrait' );
+use TheFrosty\WP\Plugin\Plugin;
+use TheFrosty\WP\Plugin\PluginAwareTrait;
+use TheFrosty\WP\Plugin\Test\Framework\TestCase;
 
-		$class = new \ReflectionClass( $provider );
-		$property = $class->getProperty( 'plugin' );
-		$property->setAccessible( true );
+class PluginAwareTraitTest extends TestCase {
+    public function test_set_plugin() {
+        $provider = $this->getMockForTrait( PluginAwareTrait::class );
 
-		$plugin = new Plugin();
-		$provider->set_plugin( $plugin );
+        try {
+            $class = new \ReflectionClass( $provider );
+            $property = $class->getProperty( 'plugin' );
+            $property->setAccessible( true );
+        } catch ( \ReflectionException $exception ) {
+            $this->assertInstanceOf( \ReflectionException::class, $exception );
 
-		$this->assertSame( $plugin, $property->getValue( $provider ) );
-	}
+            return;
+        }
+
+        $plugin = new Plugin();
+        /** @var PluginAwareTrait $provider */
+        $provider->set_plugin( $plugin );
+
+        $this->assertSame( $plugin, $property->getValue( $provider ) );
+    }
 }

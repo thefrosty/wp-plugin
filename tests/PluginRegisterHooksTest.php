@@ -1,26 +1,37 @@
 <?php
-namespace Cedaro\WP\Plugin\Test;
 
-use Cedaro\WP\Plugin\Plugin;
+namespace TheFrosty\WP\Plugin\Test;
 
-class PluginRegisterHooksTest extends \PHPUnit\Framework\TestCase {
-	public function test_register_hooks() {
-		$plugin = new Plugin();
-		$provider = $this->get_mock_provider();
+use TheFrosty\WP\Plugin\AbstractHookProvider;
+use TheFrosty\WP\Plugin\HookProviderInterface;
+use TheFrosty\WP\Plugin\Plugin;
+use TheFrosty\WP\Plugin\Test\Framework\TestCase;
 
-		$class = new \ReflectionClass( $provider );
-		$property = $class->getProperty( 'plugin' );
-		$property->setAccessible( true );
+class PluginRegisterHooksTest extends TestCase {
+    public function test_register_hooks() {
+        $provider = $this->get_mock_provider();
 
-		$provider->expects( $this->exactly( 1 ) )->method( 'register_hooks' );
+        try {
+            $class = new \ReflectionClass( $provider );
+            $property = $class->getProperty( 'plugin' );
+            $property->setAccessible( true );
+        } catch ( \ReflectionException $exception ) {
+            $this->assertInstanceOf( \ReflectionException::class, $exception );
 
-		$plugin->register_hooks( $provider );
+            return;
+        }
 
-		$this->assertSame( $plugin, $property->getValue( $provider ) );
-	}
+        $provider->expects( $this->exactly( 1 ) )->method( 'register_hooks' );
 
-	protected function get_mock_provider() {
-		return $this->getMockBuilder( '\Cedaro\WP\Plugin\AbstractHookProvider' )
-			->getMockForAbstractClass();
-	}
+        $plugin = new Plugin();
+        /** @var HookProviderInterface $provider */
+        $plugin->register_hooks( $provider );
+
+        $this->assertSame( $plugin, $property->getValue( $provider ) );
+    }
+
+    protected function get_mock_provider() {
+        return $this->getMockBuilder( AbstractHookProvider::class )
+            ->getMockForAbstractClass();
+    }
 }
