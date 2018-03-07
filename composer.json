@@ -2,7 +2,7 @@
   "name": "thefrosty/wp-plugin",
   "description": "A base WordPress plugin library.",
   "license": "MIT",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "homepage": "https://github.com/thefrosty/wp-plugin",
   "authors": [
     {
@@ -24,8 +24,7 @@
   "require": {
     "php": ">=7.0.1",
     "pimple/pimple": "^3.0",
-    "psr/container": "^1.0",
-    "johnpbloch/wordpress-dev": "dev-master"
+    "psr/container": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "*@stable"
