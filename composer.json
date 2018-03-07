@@ -1,9 +1,16 @@
 {
-  "name": "cedaro/wp-plugin",
+  "name": "thefrosty/wp-plugin",
   "description": "A base WordPress plugin library.",
   "license": "MIT",
-  "homepage": "https://github.com/cedaro/wp-plugin",
+  "version": "0.4.0",
+  "homepage": "https://github.com/thefrosty/wp-plugin",
   "authors": [
+    {
+      "name": "Austin Passy",
+      "email": "thefrosty@users.noreply.github.com",
+      "homepage": "https://austin.passy.co",
+      "role": "Developer"
+    },
     {
       "name": "Brady Vercher",
       "email": "brady@blazersix.com",
@@ -11,8 +18,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/cedaro/wp-plugin/issues",
-    "source": "https://github.com/cedaro/wp-plugin"
+    "issues": "https://github.com/thefrosty/wp-plugin/issues",
+    "source": "https://github.com/thefrosty/wp-plugin"
   },
   "require": {
     "php": ">=7.0.1",
@@ -23,14 +30,17 @@
   "require-dev": {
     "phpunit/phpunit": "*@stable"
   },
+  "suggest": {
+    "thefrosty/wp-utilities": "A library containing additional WordPress development resources."
+  },
   "autoload": {
     "psr-4": {
-      "Cedaro\\WP\\Plugin\\": "src/"
+      "TheFrosty\\WP\\Plugin\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Cedaro\\WP\\Plugin\\Test\\": "tests/"
+      "TheFrosty\\WP\\Plugin\\Test\\": "tests/"
     }
   },
   "scripts": {
